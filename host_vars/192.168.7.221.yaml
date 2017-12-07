@@ -1,0 +1,65 @@
+---
+hostname: ANSIBLE-vEOS-10
+
+vlans:
+  - vlanid: 1
+    name: default
+  - vlanid: 2
+    name: production2
+  - vlanid: 3
+    name: production3
+  - vlanid: 4
+    name: production4
+  - vlanid: 5
+    name: production5
+  - vlanid: 6
+    name: production6
+  - vlanid: 7
+    name: production7
+  - vlanid: 8
+    name: production8
+  - vlanid: 200
+    state: absent
+    name: ansible-test
+    trunk_groups:
+      - tg1
+      - tg2
+      - tg3
+
+interfaces:
+  - name: Loopback0
+    description: "ANSIBLE Loopback0" 
+    enable: true
+  - name: Loopback1
+    enable: true
+    description: "ANSIBLE Loopback1"
+  - name: Ethernet1
+    description: "ANSIBLE <10G TWTC PTP to l2-hls-swrep-A1 08/PIGS/110154/TWCS>"
+    enable: true
+  - name: Ethernet2
+    description: "ANSIBLE MLAG PEER LINK"
+    enable: true
+
+ip_interfaces:
+  - name: Loopback0
+    address: 1.1.1.1/32
+    state: absent
+  - name: Loopback1
+    address: 2.2.2.1/32
+  - name: Ethernet1
+    address: 10.1.1.0/31
+    state: present
+    mtu: 9000
+  - name: Ethernet2
+    address: 10.1.1.2/31
+    mtu: 9000
+
+switchports:
+  - name: Ethernet6
+    mode: trunk
+    trunk_native_vlan: 2
+    trunk_allowed_vlans:
+      - 2
+      - 3
+      - 4
+      - 5

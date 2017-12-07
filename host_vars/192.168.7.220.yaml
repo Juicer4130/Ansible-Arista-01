@@ -1,0 +1,116 @@
+---
+hostname: ANSIBLE-vEOS-9
+#eos_ip_routing_enabled: yes
+
+vlans:
+  - vlanid: 1
+    name: default
+  - vlanid: 2
+    name: production2
+#    state: absent
+  - vlanid: 3
+    name: production3
+  - vlanid: 4
+    name: production4
+  - vlanid: 5
+    name: production5
+  - vlanid: 6
+    name: production6
+  - vlanid: 7
+    name: production7
+  - vlanid: 8
+    name: production8
+  - vlanid: 9
+    name: production9
+  - vlanid: 200
+    state: absent
+    name: ansible-test
+  - vlanid: 1001
+    name: production1001
+  - vlanid: 1002
+    name: production1002
+    trunk_groups:
+      - tg1
+      - tg2
+      - tg3
+#   - vlanid: 4094
+#     name: production4094
+
+eos_purge_vlans: true
+
+interfaces:
+  - name: Loopback0-1
+    description: "ANSIBLE RANGE DES Loopback" 
+    enable: true
+#  - name: Loopback1
+#    enable: true
+#    description: "ANSIBLE Loopback1"
+  - name: Ethernet1
+    description: "ANSIBLE <10G TWTC PTP to l2-hls-swrep-A1 08/PIGS/110154/TWCS>"
+    enable: true
+  - name: Ethernet2
+    description: "ANSIBLE MLAG PEER LINK"
+    enable: false
+  - name: Ethernet5
+    description: "Test Access Port"
+    enable: false
+  - name: Port-Channel10
+    description: "Test"
+    enable: true
+
+ip_interfaces:
+  - name: Loopback0
+    address: 1.1.1.1/32
+    state: absent
+  - name: Loopback1
+    address: 2.2.2.1/32
+  - name: Ethernet1
+    address: 10.1.1.0/31
+    state: present
+    mtu: 9000
+  - name: Ethernet2
+    address: 10.1.1.2/31
+    mtu: 9000
+
+switchports:
+#  - name: Ethernet5
+#    mode: access
+#    access_vlan: 2
+
+  - name: Ethernet5,6
+    mode: trunk
+    trunk_native_vlan: 2
+    trunk_allowed_vlans:
+      - 2
+      - 3
+      - 4
+      - 5
+
+virtual_mac_addr: "00:1c:73:00:00:99"
+
+varp_interfaces:
+  - vlanid: 1001
+    name: production1001
+    description: My Vlan1001
+    enable: true
+    interface_addr: 192.168.1.4/24
+    virtual_addrs:
+      - 192.168.1.1
+      - 192.168.11.1
+
+
+mlag:
+  mlag_domain_id: mlag1
+  mlag_trunk_group: mlagpeer
+  mlag_shutdown: false
+  local_if_vlan: Vlan1001
+  local_if_ip_address: 192.168.1.4/24
+  local_if_disable_spanning_tree: true
+  peer_address: 192.168.1.5
+  peer_link_if: Port-Channel10
+  peer_link_mode: trunk
+  peer_link_lacp_mode: active
+  peer_link_enable: true
+  peer_link_members:
+    - Ethernet4
+
