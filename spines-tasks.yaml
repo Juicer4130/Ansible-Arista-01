@@ -1,0 +1,107 @@
+
+---
+- hosts: arista_spines
+  gather_facts: no
+  connection: local
+
+  tasks:
+   - name: load an acl into the device
+     eos_config:
+      lines:
+       - 10 permit ip 1.1.1.1/32 any log
+       - 20 permit ip 2.2.2.2/32 any log
+       - 30 permit ip 3.3.3.3/32 any log
+       - 40 permit ip 4.4.4.4/32 any log
+      parents: ip access-list test
+      before: no ip access-list test
+      replace: block
+      provider: '{{ provider }}'
+
+   - name: Gather info from Show Version
+     eos_command:
+       commands: 
+         - show version
+         - show interfaces description
+         - show ip route
+       username: ansible
+       password: ansible
+       transport: eapi
+       use_ssl: no
+
+   - name: configure host logging
+     eos_logging:
+      dest: host
+      name: 172.16.0.1
+      state: present
+      username: ansible
+      password: ansible
+      transport: eapi
+      use_ssl: no
+
+   - name: configure console logging level and facility
+     eos_logging:
+      dest: console
+#      facility: local7
+      level: debugging
+      state: present
+      username: ansible
+      password: ansible
+      transport: eapi
+      use_ssl: no
+
+   - name: configure buffer size
+     eos_logging:
+      dest: buffered
+      size: 5000
+      username: ansible
+      password: ansible
+      transport: eapi
+      use_ssl: no
+
+   - name: configure hostname and domain-name
+     eos_system:
+      domain_name: test.example.com
+      username: ansible
+      password: ansible
+      transport: eapi
+      use_ssl: no
+
+   - name: configure name servers
+     eos_system:
+       name_servers:
+#         - 8.8.8.8
+#         - 8.8.4.4
+         - { server: 8.8.8.8, vrf: MGMT }
+         - { server: 8.8.4.4, vrf: MGMT }
+       provider: '{{ provider }}'
+
+   - name: Create vrf
+     eos_vrf:
+       name: test
+       rd: 1:200
+       interfaces:
+         - Ethernet1
+       state: present
+       provider: '{{ provider1 }}'
+
+   - name: Create vlan
+     eos_vlan:
+       vlan_id: 4000
+       name: vlan-4000
+       state: present
+       provider: '{{ provider1 }}'
+
+#   - name: Create vlan
+#     eos_vlan: vlanid=4001 enable=yes name=foo
+#      provider: '{{ provider1 }}'
+
+   - name: configure the login banner
+     eos_banner:
+       banner: login
+       text: |
+         this is my login banner
+         that contains a multiline
+         string
+       state: present
+       provider: '{{ provider }}'
+

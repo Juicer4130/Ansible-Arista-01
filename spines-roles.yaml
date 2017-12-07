@@ -1,0 +1,13 @@
+---
+- hosts: arista_spines
+  gather_facts: no
+  connection: local
+
+  roles:
+    - arista.eos-system
+    - arista.eos-interfaces
+    - arista.eos-bridging
+    - arista.eos-ipv4
+    - arista.eos-route-control
+    - arista.eos-virtual-router
+    - arista.eos-mlag	
