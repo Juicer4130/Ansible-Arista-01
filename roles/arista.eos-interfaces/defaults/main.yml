@@ -1,0 +1,12 @@
+---
+# defaults file for eos-interfaces
+eos_save_running_config: true
+
+default_state: present
+default_enable: true
+default_cg_mode: active
+
+resource_version: '2.2'
+gather_config_commands:
+  - command: 'show running-config all | exclude \.\*'
+    output: 'text'

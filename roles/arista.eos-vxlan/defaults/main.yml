@@ -1,0 +1,18 @@
+---
+# defaults file
+eos_save_running_config: true
+
+vxlan_default_name: Vxlan1
+vxlan_default_state: present
+vxlan_default_enable: true
+vxlan_default_udp_port: 4789
+vxlan_vtep_default_state: present
+vxlan_vtep_default_action: reset
+vxlan_vtep_default_reset: false
+vxlan_vlan_default_state: present
+eos_purge_vxlan: false
+
+resource_version: '2.2'
+gather_config_commands:
+  - command: 'show running-config all | exclude \.\*'
+    output: 'text'

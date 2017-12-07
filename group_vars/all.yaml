@@ -1,0 +1,70 @@
+---
+# make ansible play nice in a virtualenv
+ansible_python_interpreter: python
+
+provider:
+  host: "{{ inventory_hostname }}"
+  username: ansible
+  password: ansible
+  authorize: yes
+  use_ssl: no
+  transport: eapi
+
+provider1:
+  host: "{{ inventory_hostname }}"
+  username: ansible
+  password: ansible
+  authorize: yes
+  use_ssl: no
+  transport: cli
+#eos_connection:
+#  host: "{{ inventory_hostname }}"
+#  username: ansible
+#  password: wrong
+#  authorize: yes
+#  use_ssl: no
+#  transport: eapi
+
+eos_purge_vlan_trunk_groups: yes
+
+eos_users:
+  - name: superadmin
+    encryption: md5
+    secret: '$1$J0auuPhz$Pkr5NnHssW.Jqlk17Ylpk0'
+    privilege: 15
+    role: network-admin
+  - name: simplebob
+    nopassword: true
+    privilege: 0
+    role: network-operator
+
+dns_servers:
+  - 8.8.8.8
+  - 1.1.1.1
+  - 2.2.2.2
+
+eos_ip_routing_enabled: yes
+
+routemaps:
+  - name: RM-1
+    action: permit
+    seqno: 10
+    description: My wonderful routemap
+    match:
+      - as 1000
+      - source-protocol bgp
+    continue: 20
+  - name: RM-1
+    action: permit
+    seqno: 20
+    description: My wonderful routemap
+    set:
+      - distance 50
+      - tag 100
+
+ipv4_static_routes:
+  - ip_dest: 10.10.10.10/32
+    next_hop: Management1
+    next_hop_ip: 192.168.7.1
+    route_name: Default
+    tag: 100

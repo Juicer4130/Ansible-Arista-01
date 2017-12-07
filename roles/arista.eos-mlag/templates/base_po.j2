@@ -1,0 +1,23 @@
+#jinja2: trim_blocks: False
+#jinja2: lstrip_blocks: False
+
+{% set state = mlag.state | default(mlag_defaults.state) %}
+
+{% if state == 'absent' %}
+
+{# Remove Port-Channel #}
+{% if _eos_config | re_search('^interface ' ~ mlag.peer_link_if) %}
+
+no interface {{ mlag.peer_link_if }}
+
+{% endif %}
+
+{% elif state == 'present' %}
+   {# Configure Port-Channel #}
+   {% set peer_link_mode = mlag.peer_link_mode | default(mlag_defaults.peer_link_mode) %}
+
+interface {{ mlag.peer_link_if }}
+   switchport mode {{ peer_link_mode }}
+   switchport trunk group {{ mlag.mlag_trunk_group }}
+
+{% endif %}

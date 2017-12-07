@@ -1,0 +1,27 @@
+---
+# defaults file for eos-bgp
+eos_save_running_config: true
+
+bgp_defaults:
+  state: present
+  enable: no
+  maximum_paths: 1
+  log_neighbor_changes: yes
+  redistribute: []
+  timers:
+    keep_alive: 60
+    hold: 180
+
+neighbor_defaults:
+  enable: yes
+
+network_defaults:
+  state: present
+
+eos_purge_bgp_networks: no
+eos_purge_bgp_neighbors: no
+
+resource_version: '2.2'
+gather_config_commands:
+  - command: 'show running-config all | exclude \.\*'
+    output: 'text'

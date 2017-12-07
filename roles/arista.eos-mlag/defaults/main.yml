@@ -1,0 +1,16 @@
+---
+# defaults file for eos-mlag
+eos_save_running_config: true
+
+mlag_defaults:
+  mlag_shutdown: false
+  local_if_disable_spanning_tree: true
+  peer_link_mode: trunk
+  peer_link_lacp_mode: active
+  peer_link_enable: true
+  state: present
+
+resource_version: '2.2'
+gather_config_commands:
+  - command: 'show running-config all | exclude \.\*'
+    output: 'text'

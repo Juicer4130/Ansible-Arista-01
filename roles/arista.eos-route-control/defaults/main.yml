@@ -1,0 +1,13 @@
+---
+# defaults file for eos-route-control
+eos_save_running_config: true
+
+default_routemap_state: present
+default_static_route_state: present
+default_static_route_dist: 1
+default_static_route_tag: 0
+
+resource_version: '2.2'
+gather_config_commands:
+  - command: 'show running-config all | exclude \.\*'
+    output: 'text'
