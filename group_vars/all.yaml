@@ -10,14 +10,6 @@ provider:
   use_ssl: no
   transport: eapi
 
-provider1:
-  host: "{{ inventory_hostname }}"
-  username: ansible
-  password: ansible
-  authorize: yes
-  use_ssl: no
-  transport: cli
-
 provider_cli:
   host: "{{ inventory_hostname }}"
   username: ansible
