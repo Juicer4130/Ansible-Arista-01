@@ -17,13 +17,15 @@ provider1:
   authorize: yes
   use_ssl: no
   transport: cli
-#eos_connection:
-#  host: "{{ inventory_hostname }}"
-#  username: ansible
-#  password: wrong
-#  authorize: yes
-#  use_ssl: no
-#  transport: eapi
+
+provider_cli:
+  host: "{{ inventory_hostname }}"
+  username: ansible
+  password: ansible
+  authorize: yes
+  use_ssl: no
+  transport: cli
+
 
 eos_purge_vlan_trunk_groups: yes
 

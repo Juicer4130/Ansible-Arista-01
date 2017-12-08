@@ -82,18 +82,18 @@
        interfaces:
          - Ethernet1
        state: present
-       provider: '{{ provider_cli }}'
+       provider: '{{ provider1 }}'
 
    - name: Create vlan
      eos_vlan:
        vlan_id: 4000
        name: vlan-4000
        state: present
-       provider: '{{ provider_cli }}'
+       provider: '{{ provider1 }}'
 
 #   - name: Create vlan
 #     eos_vlan: vlanid=4001 enable=yes name=foo
-#      provider: '{{ provider_cli }}'
+#      provider: '{{ provider1 }}'
 
    - name: configure the login banner
      eos_banner:

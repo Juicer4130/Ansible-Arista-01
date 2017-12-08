@@ -1,0 +1,16 @@
+---
+- hosts: arista_spines
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+   - name: Create vrf
+     eos_vrf:
+       name: test
+       rd: 1:200
+       interfaces:
+        - Ethernet1
+       state: present
+       provider: '{{ provider_cli }}'
+
