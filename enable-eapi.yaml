@@ -1,0 +1,12 @@
+---
+- hosts: arista_spines
+  gather_facts: no
+  connection: local
+
+  tasks:
+   - name: Enable eAPI with no HTTP, HTTPS at port 9443, local HTTP at port 80, and socket enabled
+     eos_eapi:
+       state: started
+       http: true
+ #      https_port: 9443 local_http: yes local_http_port: 80 socket: yes
+       provider: '{{ provider_cli }}'

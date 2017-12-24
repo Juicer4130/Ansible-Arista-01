@@ -91,10 +91,6 @@
        state: present
        provider: '{{ provider_cli }}'
 
-#   - name: Create vlan
-#     eos_vlan: vlanid=4001 enable=yes name=foo
-#      provider: '{{ provider_cli }}'
-
    - name: configure the login banner
      eos_banner:
        banner: login

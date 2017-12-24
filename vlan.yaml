@@ -1,0 +1,19 @@
+---
+- hosts: arista_spines
+  gather_facts: no
+  connection: local
+
+  tasks:
+   - name: test changing hostname
+     eos_config:
+       lines: ['ntp server 1.1.1.1']
+       lines: ['ntp server 3.3.3.3']
+       lines: ['ntp server 4.4.4.4']
+       provider: '{{ provider }}'
+
+
+#    - name: create VLAN
+#    - name: configure interface to be shutdown
+#      eos_config: command='shutdown' section='interface Ethernet1'
+#        lines: 'hostname blah'
+#        provider: '{{ provider-cli }}'

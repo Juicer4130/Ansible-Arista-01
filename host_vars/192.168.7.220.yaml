@@ -27,14 +27,14 @@ vlans:
     name: ansible-test
   - vlanid: 1001
     name: production1001
-  - vlanid: 1002
-    name: production1002
-    trunk_groups:
-      - tg1
-      - tg2
-      - tg3
-#   - vlanid: 4094
-#     name: production4094
+#  - vlanid: 1002
+#    name: production1002
+#    trunk_groups:
+#      - tg1
+#      - tg2
+#      - tg3
+  - vlanid: 4094
+    name: MLAG-Peerlink
 
 eos_purge_vlans: true
 
