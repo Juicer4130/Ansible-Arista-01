@@ -3,7 +3,7 @@
   hosts: arista
 
   tasks:
-    - name: use eos_vlan to add vlans to Arista switches.
+    - name: Simple way to add 1 vlan to Arista switches.
       eos_vlan:
         vlan_id: 4000
         name: 4000-Wifi

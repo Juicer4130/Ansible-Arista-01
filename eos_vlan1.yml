@@ -16,7 +16,7 @@
 
 
   tasks:
-    - name: use eos_vlan to add vlans to Arista switches.
+    - name: use eos_vlan with a list to add many vlans to Arista switches.
       eos_vlan:
         vlan_id: "{{ item.vlan_id }}"
         name: "{{ item.name }}"
