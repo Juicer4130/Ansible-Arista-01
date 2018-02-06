@@ -1,0 +1,9 @@
+---
+- name: Arista Example
+  hosts: arista
+
+  tasks:
+    - name: EOS get the facts!
+      eos_command:
+        commands: show version
+        provider: "{{ provider_cli }}"

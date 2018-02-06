@@ -1,0 +1,11 @@
+---
+- name: Arista Example
+  hosts: arista
+
+  tasks:
+    - name: use eos_vlan to add vlans to Arista switches.
+      eos_vlan:
+        vlan_id: 4000
+        name: 4000-Wifi
+        state: present
+        provider: "{{ provider_cli }}"

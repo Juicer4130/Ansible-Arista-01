@@ -1,0 +1,24 @@
+---
+- name: Arista Example
+  hosts: arista
+
+  vars:
+    vlans:
+      - vlan_id: 550
+        state: present
+        name: 550-Blue
+      - vlan_id: 551
+        state: present
+        name: 551-Red
+      - vlan_id: 553
+        state: present
+        name: 553-Yellow
+
+
+  tasks:
+    - name: use eos_vlan to add vlans to Arista switches.
+      eos_vlan:
+        vlan_id: "{{ item.vlan_id }}"
+        name: "{{ item.name }}"
+        provider: "{{ provider_cli }}"
+      with_items: "{{ vlans }}"

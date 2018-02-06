@@ -1,0 +1,15 @@
+---
+- name: Arista Example
+  hosts: arista
+  vars:
+    eapi:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      transport: eapi
+      validate_certs: no
+
+  tasks:
+    - name: EOS show Image File
+      eos_facts:
+        provider: "{{ eapi }}"

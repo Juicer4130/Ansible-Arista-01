@@ -1,0 +1,14 @@
+---
+- name: Arista Example
+  hosts: arista
+
+  tasks:
+    - name: EOS get the facts!
+      eos_banner:
+        banner: login
+        text: |
+          this is my banner
+          It has many lines
+          stay out
+        state: present
+        provider: "{{ provider_eapi }}"

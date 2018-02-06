@@ -1,0 +1,8 @@
+---
+- name: Arista Example
+  hosts: arista
+
+  tasks:
+    - name: EOS get the facts!
+      eos_facts:
+        provider: "{{ provider_eapi }}"
