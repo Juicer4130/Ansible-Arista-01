@@ -1,0 +1,31 @@
+[all:vars]
+ansible_connection=local
+#ansible_python_interpreter=/home/kgiusti/VENV/ansible/bin/python
+
+[local]
+localhost
+
+[cisco]
+pynet-rtr1 ansible_host=184.105.247.70
+pynet-rtr2 ansible_host=184.105.247.71
+
+[cisco:vars]
+username=pyclass
+password=88newclass
+
+[arista]
+veos-9 ansible_host=192.168.7.1
+veos-10 ansible_host=192.168.7.221
+
+[arista:vars]
+eapi_port=443
+username=kgiusti
+password=Br0wnz
+
+[nxos]
+nxos1 ansible_host=nxos1.twb-tech.com
+nxos2 ansible_host=nxos2.twb-tech.com
+
+[nxos:vars]
+username=pyclass
+password=88newclass

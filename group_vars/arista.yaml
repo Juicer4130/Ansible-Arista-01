@@ -1,0 +1,25 @@
+---
+provider_eapi:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  transport: eapi
+  validate_certs: no
+
+provider_cli:
+  host: "{{ ansible_host }}"
+  username: "{{ username }}"
+  password: "{{ password }}"
+  authorize: yes
+  use_ssl: no
+  transport: cli
+
+vlans_common:
+    - vlan_id: 301
+      name: blue
+    - vlan_id: 302
+      name: red
+    - vlan_id: 303
+      name: green
+
+vlans: "{{ vlans_common }} + {{ vlans_unique | default([]) }}"

@@ -1,0 +1,10 @@
+---
+- name: Arista Example
+  hosts: arista
+  tasks:
+    - name: Configure Arista vlans
+      eos_vlan:
+        provider: "{{ provider_cli }}"
+        vlan_id: "{{ item.vlan_id }}"
+        name: "{{ item.name }}"
+      with_items: "{{ vlans }}"

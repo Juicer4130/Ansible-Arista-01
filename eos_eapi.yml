@@ -1,0 +1,15 @@
+---
+- name: Arista Example
+  hosts: arista
+
+  tasks:
+    - name: Enable eAPI with no HTTP, HTTPS at port 443 for provider_eapi to be used.
+      eos_eapi:
+        state: started
+
+        https: true
+        https_port: 443
+#        local_http: yes
+#        local_http_port: 80
+#        socket: yes
+        provider: '{{ provider_cli }}'

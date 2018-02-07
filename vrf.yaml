@@ -1,5 +1,5 @@
 ---
-- hosts: arista_spines
+- hosts: arista
   gather_facts: no
   connection: local
 
