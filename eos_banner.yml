@@ -7,8 +7,8 @@
       eos_banner:
         banner: login
         text: |
-          this is my banner
-          It has many lines
-          stay out
+          This is a secure network, all activity is monitored.
+          If you do not have permission to connect then don't
+          If you do I will beat your ass, no really I will.
         state: present
         provider: "{{ provider_eapi }}"

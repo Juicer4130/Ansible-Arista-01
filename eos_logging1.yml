@@ -1,0 +1,15 @@
+---
+- name: Arista Example
+  hosts: arista
+
+  tasks:
+
+    - name: configure host logging
+      eos_logging:
+        aggregate:
+          - { dest: console, level: warnings }
+          - { dest: buffered, size: 480000 }
+          - { dest: host, name: 1.1.1.1 }
+          - { dest: host, name: 1.1.1.2 }
+        state: present 
+        provider: "{{ provider_eapi }}"

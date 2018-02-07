@@ -1,0 +1,15 @@
+---
+- name: Arista Playbook for VXLAN.
+  hosts: arista
+  tasks:
+    - name: use eos_config to configure VXLAN.
+      eos_config:
+        lines:
+          - description my vxlan interface      
+          - vxlan source-interface Loopback10
+          - vxlan udp-port 4789 
+          - "vxlan vlan {{ item.vxlan_vlan }} vni {{ item.vxlan_vlan }}"
+          - "vxlan flood vtep 2.2.2.2" 
+        parents: interface vxlan 1
+        provider: "{{ provider_cli }}"
+      with_items: "{{ vxlan_config }}"

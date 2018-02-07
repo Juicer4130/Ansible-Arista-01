@@ -14,20 +14,8 @@ provider_cli:
   use_ssl: no
   transport: cli
 
-vlans_common:
-    - vlan_id: 301
-      name: blue
-    - vlan_id: 302
-      name: red
-    - vlan_id: 303
-      name: green
-
-vlans: "{{ vlans_common }} + {{ vlans_unique | default([]) }}"
-
 vxlan_config:
   - vxlan_vlan: 222
   - vxlan_vlan: 333
   - vxlan_vlan: 444
 
-syslog_servers:
-  - 1.1.1.9

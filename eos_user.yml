@@ -1,0 +1,13 @@
+---
+- name: Arista Example
+  hosts: arista
+
+  tasks:
+    - name: Simple playbook to create EOS user
+      eos_user:
+        name: ansible-added
+        privilege: 15
+        configured_password: Br0wnz
+        update_password: always
+        state: present
+        provider: "{{ provider_eapi }}"
