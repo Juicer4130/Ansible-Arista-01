@@ -8,5 +8,8 @@
       eos_config:
         lines:
           - "idle-timeout 60"
+          - "no shutdown"
+          - "login timeout 90"
         parents: management ssh
+        defaults: yes
         provider: "{{ provider_eapi }}"

@@ -1,0 +1,16 @@
+---
+- name: Arista GoodHousekeeping settings
+  hosts: arista
+  tasks:
+
+    - name: configure Arista GoodHousekeeping settings
+      eos_config:
+        lines:
+          - "spanning-tree mode rapid-pvst"
+          - "ip routing"
+          - "ntp server 192.5.41.41"
+          - "clock timezone US/Eastern"
+          - "aaa authentication login console local"
+          - "aaa authorization exec default local"
+          - "hostname {{ hostname }}"
+        provider: "{{ provider_eapi }}"

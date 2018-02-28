@@ -1,0 +1,14 @@
+---
+- name: Arista MGMT settings
+  hosts: arista
+  tasks:
+
+    - name: configure Arista Management1 interface settings
+      eos_config:
+        lines:
+          - "ip address {{ ip_interfaces_mgmt1 }}"
+          - "no shutdown"
+          - "description uplink to junk blah int 1/1"
+        parents: interface Management1
+        defaults: yes
+        provider: "{{ provider_eapi }}"
