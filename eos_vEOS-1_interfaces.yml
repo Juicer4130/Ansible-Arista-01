@@ -1,0 +1,46 @@
+---
+- name: Arista interface settings for vEOS-1
+  hosts: veos-1
+  tasks:
+
+    - name: configure Arista interface E1 settings
+      eos_config:
+        lines:
+          - "switchport"
+          - "switchport mode trunk"
+          - "switchport access vlan 1"
+          - "description for interface Ethernet1"
+          - "no shutdown"
+          - "switchport trunk allowed vlan 1,20"
+        parents: interface Ethernet1
+        defaults: yes
+        save_when: modified
+        provider: "{{ provider_eapi }}"
+
+    - name: configure Arista interface E2 settings
+      eos_config:
+        lines:
+          - "switchport"
+          - "switchport mode access"
+          - "switchport access vlan 20"
+          - "description for interface Ethernet3"
+          - "no shutdown"
+          - "switchport trunk allowed vlan 1-4094"
+        parents: interface Ethernet2
+        defaults: yes
+        save_when: modified
+        provider: "{{ provider_eapi }}"
+
+    - name: configure Arista interface E3 settings
+      eos_config:
+        lines:
+          - "switchport"
+          - "switchport mode access"
+          - "switchport access vlan 20"
+          - "description for interface Ethernet3"
+          - "no shutdown"
+          - "switchport trunk allowed vlan 1-4094"
+        parents: interface Ethernet3
+        defaults: yes
+        save_when: modified
+        provider: "{{ provider_eapi }}"

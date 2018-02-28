@@ -13,4 +13,5 @@
           - "aaa authentication login console local"
           - "aaa authorization exec default local"
           - "hostname {{ hostname }}"
+        save_when: modified
         provider: "{{ provider_eapi }}"
