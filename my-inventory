@@ -14,8 +14,9 @@ username=pyclass
 password=88newclass
 
 [arista]
-veos-9 ansible_host=192.168.7.1
-veos-10 ansible_host=192.168.7.221
+veos-1 ansible_host=10.0.255.163
+#veos-9 ansible_host=192.168.7.1
+#veos-10 ansible_host=192.168.7.221
 
 [arista:vars]
 eapi_port=443

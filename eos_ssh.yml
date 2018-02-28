@@ -1,0 +1,12 @@
+---
+- name: Arista SSH settings
+  hosts: arista
+
+  tasks:
+
+    - name: configure Arista SSH settings
+      eos_config:
+        lines:
+          - "idle-timeout 60"
+        parents: management ssh
+        provider: "{{ provider_eapi }}"
