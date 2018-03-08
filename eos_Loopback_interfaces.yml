@@ -1,0 +1,16 @@
+---
+- name: Arista interface settings for Loopback addresses.
+  hosts: veos-1
+  tasks:
+
+    - name: configure Arista interface Loopback addresses
+      eos_config:
+        lines:
+          - "description Loopback MGMT Interface"
+          - "ip address {{ ip_interfaces_loopback1 }}"
+          - "no shutdown"
+        parents: interface Loopback1
+        defaults: yes
+        save_when: modified
+        provider: "{{ provider_eapi }}"
+

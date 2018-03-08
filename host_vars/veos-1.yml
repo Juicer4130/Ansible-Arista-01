@@ -1,3 +1,4 @@
 ---
 hostname: vEOS-1
 ip_interfaces_mgmt1: 10.0.255.163/24
+ip_interfaces_loopback1: 1.1.1.1/32

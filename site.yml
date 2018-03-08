@@ -1,0 +1,6 @@
+---
+- include: eos_goodhousekeeping.yml
+- include: eos_ssh.yml
+- include: eos_eapi.yml
+- include: eos_mgmt.yml
+
