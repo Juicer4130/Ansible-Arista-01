@@ -2,3 +2,7 @@
 hostname: vEOS-1
 ip_interfaces_mgmt1: 10.0.255.163/24
 ip_interfaces_loopback1: 1.1.1.1/32
+
+vlans_unique:
+  - vlan_id: 304
+    name: yellow
